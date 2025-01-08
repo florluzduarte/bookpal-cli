@@ -1,9 +1,4 @@
-# TODO: Definir getters, setters y manejo de errores para todas las properties de Book
-# TODO: generar las clases heredadas BookRead y BookListed
-# TODO: definir getters, setters y manejo de errores de las properties de las clases con herencia
-
 import sys
-
 from utils import name_validator, get_genres, get_subgenres, get_formats
 
 
@@ -17,17 +12,18 @@ class Book:
         self.price = price
         self.format = format
     
-    def __str__(self):
-        return f"""
-        ======
+    # TODO: should this method be applyied only to child classes???
+    # def __str__(self):
+    #     return f"""
+    #     ======
 
-        📚 Title: {self.title}
-        🤓 Author: {self.author_first_name} {self.author_last_name}
-        ✨ Genre: {self.genre.capitalize()}
-        🔍 Subgenre: {self.subgenre.capitalize()}
-        💸 Price: ${self.price}
-        ✍️  Format: {self.format.capitalize()}
-        """
+    #     📚 Title: {self.title}
+    #     🤓 Author: {self.author_first_name} {self.author_last_name}
+    #     ✨ Genre: {self.genre.capitalize()}
+    #     🔍 Subgenre: {self.subgenre.capitalize()}
+    #     💸 Price: ${self.price}
+    #     ✍️  Format: {self.format.capitalize()}
+    #     """
 
     @property
     def title(self):
@@ -94,6 +90,7 @@ class Book:
     @price.setter
     def price(self, price):
         try:
+            # TODO: this should be handle when I prompt the user. Review later. 
             float(price)
         except ValueError:
             sys.exit("Price is not a number, or the format is invalid 😣.")
@@ -115,3 +112,8 @@ class Book:
         if format not in valid_formats:
             raise ValueError("Invalid format 😫. Available formats are: paperbook, hardcover, ebook, audiobook and pdf")
         self._format = format
+
+    @classmethod
+    def get(cls):
+        # TODO: Implement a classmethod to get all the attributes (?) or handle the get some other way. 
+        ...
