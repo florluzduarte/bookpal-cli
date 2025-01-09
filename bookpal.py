@@ -24,7 +24,7 @@ def main():
         subgenre="fantasy", 
         price="12", 
         link="https://unicornio.dev",
-        status="Bought"
+        status="bought"
         )
     
     print(book, book_two)

@@ -58,4 +58,4 @@ class BookListed(Book):
             raise ValueError("Missing book status 🥲")
         if status not in statuses:
             raise ValueError("Invalid status 😫. Valid values are: Bought, To buy, Rented, To rent")
-        self._status = status
+        self._status = status.capitalize()

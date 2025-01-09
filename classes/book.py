@@ -11,19 +11,6 @@ class Book:
         self.subgenre = subgenre
         self.price = price
         self.format = format
-    
-    # TODO: should this method be applyied only to child classes???
-    # def __str__(self):
-    #     return f"""
-    #     ======
-
-    #     📚 Title: {self.title}
-    #     🤓 Author: {self.author_first_name} {self.author_last_name}
-    #     ✨ Genre: {self.genre.capitalize()}
-    #     🔍 Subgenre: {self.subgenre.capitalize()}
-    #     💸 Price: ${self.price}
-    #     ✍️  Format: {self.format.capitalize()}
-    #     """
 
     @property
     def title(self):
@@ -112,8 +99,3 @@ class Book:
         if format not in valid_formats:
             raise ValueError("Invalid format 😫. Available formats are: paperbook, hardcover, ebook, audiobook and pdf")
         self._format = format
-
-    @classmethod
-    def get(cls):
-        # TODO: Implement a classmethod to get all the attributes (?) or handle the get some other way. 
-        ...

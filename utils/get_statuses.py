@@ -1,2 +1,2 @@
 def get_statuses():
-    return ["Bought", "To buy", "Rented", "To rent"]
+    return ["bought", "to buy", "rented", "to rent"]
