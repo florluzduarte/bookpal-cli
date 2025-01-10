@@ -76,13 +76,8 @@ class Book:
 
     @price.setter
     def price(self, price):
-        try:
-            # TODO: this should be handle when I prompt the user. Review later. 
-            float(price)
-        except ValueError:
-            sys.exit("Price is not a number, or the format is invalid 😣.")
-        if not price:
-            raise ValueError("Missing price 💸.")
+        if price < 0:
+            raise ValueError("Price should be a amount equal to 0 or grater 💸.")
         if float(price) < 0:
             raise ValueError("Price should be a positive number 😫.")
         self._price = f"{float(price):,.2f}"
