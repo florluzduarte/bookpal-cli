@@ -1,33 +1,16 @@
-from classes import BookRead, BookListed
+from utils import get_app_title
+from classes import BookGenerator
+from rich.console import Console
 
 
-def main():
-    book = BookRead(
-        title="Hola", 
-        format="ebook", 
-        author_first_name="ann", 
-        author_last_name="diaz", 
-        genre="non-fiction", 
-        subgenre="technical", 
-        price="25.99", 
-        review="Me encantó", 
-        quote="Todo es lindo", 
-        rating=4
-        )
-    
-    book_two = BookListed(
-        title="Rhythm of War", 
-        author_first_name="Brandon", 
-        author_last_name="Sanderson", 
-        format="paperback", 
-        genre="fiction", 
-        subgenre="fantasy", 
-        price="12", 
-        link="https://unicornio.dev",
-        status="bought"
-        )
-    
-    print(book, book_two)
+def main(): 
+    console = Console()
+    console.print(f"[violet]{get_app_title()}[/violet]")
+    console.print("[aquamarine1]A CLI program to organize your reading lists.[/aquamarine1]")
+    console.print("[aquamarine1]Made with love and Python by Flor Luz Duarte.[/aquamarine1]")
+    print(" ")
+    book = BookGenerator.generate_book("read")
+    print(book)
 
 
 if __name__ == "__main__":

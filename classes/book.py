@@ -1,4 +1,4 @@
-import sys
+# TODO: Add type hints to the code  
 from utils import name_validator, get_genres, get_subgenres, get_formats
 
 
@@ -31,7 +31,7 @@ class Book:
         if not author_first_name:
             raise ValueError("Missing Author's first name 😥.")
         if name_validator(author_first_name):
-            self._author_first_name = author_first_name.strip().capitalize()
+            self._author_first_name = author_first_name.capitalize()
 
     @property 
     def author_last_name(self):
@@ -42,7 +42,7 @@ class Book:
         if not author_last_name:
             raise ValueError("Missing Author's last name 😥.")
         if name_validator(author_last_name):
-            self._author_last_name = author_last_name
+            self._author_last_name = author_last_name.capitalize()
 
     @property
     def genre(self):
@@ -76,13 +76,8 @@ class Book:
 
     @price.setter
     def price(self, price):
-        try:
-            # TODO: this should be handle when I prompt the user. Review later. 
-            float(price)
-        except ValueError:
-            sys.exit("Price is not a number, or the format is invalid 😣.")
-        if not price:
-            raise ValueError("Missing price 💸.")
+        if price < 0:
+            raise ValueError("Price should be a amount equal to 0 or grater 💸.")
         if float(price) < 0:
             raise ValueError("Price should be a positive number 😫.")
         self._price = f"{float(price):,.2f}"
