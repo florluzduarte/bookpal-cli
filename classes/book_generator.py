@@ -1,6 +1,10 @@
-# TODO: Add select methods  
-# TODO: Migrate error messages to a general dict???
 from pick import pick
+from rich.console import Console
+
+console = Console()
+
+from classes import BookListed, BookRead
+from utils import get_genres, get_subgenres, get_statuses, get_formats, url_validator
 
 class BookGenerator:
     @classmethod
@@ -25,9 +29,9 @@ class BookGenerator:
                 if price >= 0:
                     break
                 else:
-                    print("Price should be a amount equal to 0 or grater 💸.")
+                    console.print("[bold red]Price should be a amount equal to 0 or grater[/bold red] 💸.")
             except ValueError:
-                print("Price should be a amount equal to 0 or grater 💸.")
+                console.print("[bold red]Price should be a amount equal to 0 or grater[/bold red] 💸.")
                 continue
         return price
 
@@ -36,7 +40,7 @@ class BookGenerator:
         while True:
             review = input("Small review (up to 500 characters): ").strip()
             if len(review) < 2 or len(review) > 500:
-                print("Book reviews should have at least 2 characters and a maximum of 500 characters 😫.")
+                console.print("[bold red]Book reviews should have at least 2 characters and a maximum of 500 characters[/bold red] 😫.")
             else:
                 break
         return review
@@ -46,7 +50,7 @@ class BookGenerator:
         while True:
             quote = input("Favorite quote (up to 200 characters): ").strip()
             if len(quote) < 2 or len(quote) > 200:
-                print("Book quotes should have at least 2 characters and a maximum of 200 characters 😥.")
+                console.print("[bold red]Book quotes should have at least 2 characters and a maximum of 200 characters[/bold red] 😥.")
             else:
                 break
         return quote
@@ -59,12 +63,67 @@ class BookGenerator:
                 if rating >= 1 and rating <= 5:
                     break
                 else:
-                   print("Rating should be an integer number between 1 and 5 🥲.") 
+                   console.print("[bold red]Rating should be an integer number between 1 and 5[/bold red] 🥲.") 
             except ValueError:
-                print("Rating should be an integer number between 1 and 5 🥲.")
+                console.print("[bold red]Rating should be an integer number between 1 and 5[/bold red] 🥲.")
                 continue
         return rating
     
     @classmethod
-    def generate_book(cls):
-        ...
+    def get_link(cls) -> str:
+        while True:
+            link = input("Add a link to the book seller: ")
+            if not link:
+                console.print("[bold red]Missing book link[/bold red] 😫")
+            match = url_validator(link)
+            if match:
+                break
+            else:
+                console.print("[bold red]Link should be a URL[/bold red] 🥲")
+                continue
+        return link
+
+    @classmethod
+    def generate_book(cls, type: str) -> BookListed | BookRead:
+        title = cls.get_text("Book title: ")
+        author_first = cls.get_text("Author's first name: ")
+        author_last = cls.get_text("Author's last name: ")
+        price = cls.get_price()
+        if type == "read":
+            rating = cls.get_rating()
+            review = cls.get_review()
+            quote = cls.get_quote()
+            genre = cls.get_selection(get_genres())
+            subgenre = cls.get_selection(get_subgenres(genre))
+            format = cls.get_selection(get_formats())
+            return BookRead(
+                title=title, 
+                author_first_name=author_first, 
+                author_last_name=author_last, 
+                price=price, 
+                rating=rating,
+                genre=genre, 
+                subgenre=subgenre, 
+                review=review, 
+                format=format, 
+                quote=quote, 
+            )
+        elif type == "listed":
+            link = cls.get_link()
+            genre = cls.get_selection(get_genres())
+            subgenre = cls.get_selection(get_subgenres(genre))
+            format = cls.get_selection(get_formats())
+            status = cls.get_selection(get_statuses())
+            return BookListed(
+                title=title,
+                author_first_name=author_first,
+                author_last_name=author_last,
+                genre=genre,
+                subgenre=subgenre,
+                price=price,
+                format=format,
+                link=link,
+                status=status,
+            )
+        else:
+            console.print("[bold red]Book type should be: 'listed' or 'read'[/bold red]")
