@@ -1,5 +1,6 @@
 # TODO: Add select methods  
 # TODO: Migrate error messages to a general dict???
+from pick import pick
 
 class BookGenerator:
     @classmethod
@@ -12,7 +13,9 @@ class BookGenerator:
 
     @classmethod
     def get_selection(cls, selection_list: list[str]) -> str:
-        ...
+        title = "Please select the right value:"
+        option, _ = pick(selection_list, title)
+        return option
 
     @classmethod
     def get_price(cls) -> float:
@@ -61,3 +64,7 @@ class BookGenerator:
                 print("Rating should be an integer number between 1 and 5 🥲.")
                 continue
         return rating
+    
+    @classmethod
+    def generate_book(cls):
+        ...

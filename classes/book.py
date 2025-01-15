@@ -1,4 +1,4 @@
-import sys
+# TODO: Add type hints to the code  
 from utils import name_validator, get_genres, get_subgenres, get_formats
 
 
@@ -31,7 +31,7 @@ class Book:
         if not author_first_name:
             raise ValueError("Missing Author's first name 😥.")
         if name_validator(author_first_name):
-            self._author_first_name = author_first_name.strip().capitalize()
+            self._author_first_name = author_first_name.capitalize()
 
     @property 
     def author_last_name(self):
@@ -42,7 +42,7 @@ class Book:
         if not author_last_name:
             raise ValueError("Missing Author's last name 😥.")
         if name_validator(author_last_name):
-            self._author_last_name = author_last_name
+            self._author_last_name = author_last_name.capitalize()
 
     @property
     def genre(self):
