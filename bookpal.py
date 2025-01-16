@@ -13,7 +13,7 @@ def main():
     FileSelector.print_info()
     file = FileSelector.get_file_name()
     print(" ")
-    print(f"Selected file: {file}")
+    console.print(f"[violet]Selected file: {file}[/violet]")
     print(" ")
 
 
