@@ -1,5 +1,5 @@
 from utils import get_app_title
-from classes import FileSelector
+from classes import FileSelector, CommandHandler
 from rich.console import Console
 
 
@@ -14,8 +14,11 @@ def main():
     file = FileSelector.get_file_name()
     print(" ")
     console.print(f"[violet]Selected file: {file}[/violet]")
+    command = CommandHandler.get_command()
+    console.print(f"[violet]Selected command: {command}[/violet]")
     print(" ")
-
+    CommandHandler.execute(command=command, file_name=file)
+    print(" ")
 
 if __name__ == "__main__":
     main()
